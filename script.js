@@ -13,24 +13,40 @@ function moveUp() {
 
 function myKeyDown(event) {
         //Clear existing intervals
-        clearInterval(interval);
-        if (event.keyCode == 37) {
-                interval = setInterval(moveLeft, 10);
-        }
-        if (event.keyCode == 38) {
-                interval = setInterval(moveUp, 10);
-        }
-        if (event.keyCode == 40) {
-                interval = setInterval(moveDown, 10);
-        }
-        if (event.keyCode == 39) {
-                interval = setInterval(moveRight, 10);
-        }
+      if (event.keyCode == 37) {
+              interval = setInterval(moveLeft, 10);
+      }
+      if (event.keyCode == 38) {
+              interval = setInterval(moveUp, 10);
+      }
+      if (event.keyCode == 40) {
+              interval = setInterval(moveDown, 10);
+      }
+      if (event.keyCode == 39) {
+              interval = setInterval(moveRight, 10);
+      }
+}
+
+function myKeyUp(event) {
+
+    if (event.keyCode == 37) {
+         clearInterval(interval);
+    }
+    if (event.keyCode == 38) {
+          clearInterval(interval);
+    }
+    if (event.keyCode == 40) {
+          clearInterval(interval);
+    }
+    if (event.keyCode == 39) {
+          clearInterval(interval);
+    }
 }
 
 
 function myLoadEvent() {
   document.addEventListener('keydown', myKeyDown);
+  document.addEventListener('keyup', myKeyDown);
 }
 
 function moveDown() {
