@@ -1,88 +1,87 @@
-var interval = 0;
+
+var leftPressed = false;
+var rightPressed = false;
+var upPressed = false;
+var downPressed = false;
+
+
+function myKeyDown(event) {
+    if (event.keyCode == 37) {
+        leftPressed = true;
+    }
+    if (event.keyCode == 38) {
+        upPressed = true;
+    }
+    if (event.keyCode == 40) {
+        downPressed = true;
+    }
+    if (event.keyCode == 39) {
+        rightPressed = true;
+    }
+}
+
+function myKeyUp(event) {
+    if (event.keyCode == 37) {
+        leftPressed = false;
+    }
+    if (event.keyCode == 38) {
+        upPressed = false;
+    }
+    if (event.keyCode == 40) {
+        downPressed = false;
+    }
+    if (event.keyCode == 39) {
+        rightPressed = false;
+    }
+}
+
+
+function moveInterval() {
+  if (leftPressed == true) {
+    moveLeft();
+  }
+  if (rightPressed == true) {
+    moveRight();
+  }
+  if (upPressed == true) {
+    moveUp();
+  }
+  if (downPressed == true) {
+    moveDown();
+  }
+}
 
 function moveUp() {
   var element = document.getElementById('circle');
   var positionTop = element.offsetTop;
   element.style.top = positionTop - 1 + 'px';
 
-  if (positionTop == 0) {
-        clearInterval(interval);
-        interval = setInterval(moveDown, 10);
-  }
 }
-
-function myKeyDown(event) {
-        //Clear existing intervals
-      if (event.keyCode == 37) {
-              interval = setInterval(moveLeft, 10);
-      }
-      if (event.keyCode == 38) {
-              interval = setInterval(moveUp, 10);
-      }
-      if (event.keyCode == 40) {
-              interval = setInterval(moveDown, 10);
-      }
-      if (event.keyCode == 39) {
-              interval = setInterval(moveRight, 10);
-      }
-}
-
-function myKeyUp(event) {
-
-    if (event.keyCode == 37) {
-         clearInterval(interval);
-    }
-    if (event.keyCode == 38) {
-          clearInterval(interval);
-    }
-    if (event.keyCode == 40) {
-          clearInterval(interval);
-    }
-    if (event.keyCode == 39) {
-          clearInterval(interval);
-    }
-}
-
-
-function myLoadEvent() {
-  document.addEventListener('keydown', myKeyDown);
-  document.addEventListener('keyup', myKeyDown);
-}
-
 function moveDown() {
   var element = document.getElementById('circle');
   var positionTop = element.offsetTop;
   element.style.top = positionTop + 1 + 'px';
-
-  if (positionTop+200 == window.innerHeight) {
-        clearInterval(interval);
-        interval = setInterval(moveUp, 10);
-  }
 }
 
 function moveLeft() {
   var element = document.getElementById('circle');
   var positionLeft = element.offsetLeft;
   element.style.left = positionLeft - 1 + 'px';
-
-  if (positionLeft == 0) {
-        clearInterval(interval);
-        interval = setInterval(moveRight, 10);
-  }
 }
 
 function moveRight() {
   var element = document.getElementById('circle');
   var positionLeft = element.offsetLeft;
   element.style.left = positionLeft + 1 + 'px';
-
-  if (positionLeft == window.innerWidth-200) {
-        clearInterval(interval);
-        interval = setInterval(moveLeft, 10);
-  }
 }
 
 
-
+function myLoadEvent() {
+  document.addEventListener('keydown', myKeyDown);
+  document.addEventListener('keyup', myKeyUp);
+  setInterval(moveInterval, 10);
+}
 
 document.addEventListener('DOMContentLoaded', myLoadEvent);
+
+
