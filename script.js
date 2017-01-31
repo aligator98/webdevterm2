@@ -26,6 +26,7 @@ function myKeyDown(event) {
         if (event.keyCode == 39) {
                 interval = setInterval(moveRight, 10);
         }
+        console.log(event.keyCode);
 }
 
 
@@ -66,7 +67,11 @@ function moveRight() {
   }
 }
 
+function myKeyDown(event) {
+  console.log(event.keyCode);
+}
 
 
+document.addEventListener('keydown', myKeyDown);
 
 document.addEventListener('DOMContentLoaded', myLoadEvent);
